@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.19)
 
 # Project name
-project(simpleds 
+project(treeds 
   VERSION 1.0 
   DESCRIPTION "Tree Data Structures in C++" 
   LANGUAGES CXX)
