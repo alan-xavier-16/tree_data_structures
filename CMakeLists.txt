@@ -16,6 +16,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -Wpedantic")
 # Define Target
 add_executable(treeds
   src/main.cpp
-  src/Tree.h
-  src/Tree.cpp
+  src/Node.h
+  src/Node.cpp
   )

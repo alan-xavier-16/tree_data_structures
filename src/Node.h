@@ -15,14 +15,22 @@ public:
   // Default Constructor
   Node(int data);
 
+  // Print left && right nodes
+  Node *getLeft();
+  Node *getRight();
+
+  // Update left && right nodes
+  void addLeft(Node *l);
+  void addRight(Node *r);
+
   // Preorder
-  void preorderTraversal(Node *node);
+  static void preorderTraversal(Node *node);
 
   // Postorder
-  void postorderTraversal(Node *node);
+  static void postorderTraversal(Node *node);
 
   // Inorder
-  void inorderTraversal(Node *node);
+  static void inorderTraversal(Node *node);
 
   // Default Destructor
   ~Node();

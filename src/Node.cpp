@@ -2,6 +2,28 @@
 
 Node::Node(int data) : _data(data) {}
 
+// Print left && right nodes
+Node *Node::getLeft()
+{
+  return this->_left;
+}
+
+Node *Node::getRight()
+{
+  return this->_right;
+}
+
+// Update left && right nodes
+void Node::addLeft(Node *l)
+{
+  this->_left = l;
+}
+
+void Node::addRight(Node *r)
+{
+  this->_right = r;
+}
+
 // Preorder
 void Node::preorderTraversal(Node *node)
 {
