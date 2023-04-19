@@ -72,4 +72,8 @@ void Node::inorderTraversal(Node *node)
 }
 
 // Default Destructor
-Node::~Node() {}
+Node::~Node()
+{
+  delete this->_left;
+  delete this->_right;
+}

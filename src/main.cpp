@@ -3,11 +3,13 @@
 int main()
 {
   /* ----------------------------- Tree Traversal ----------------------------- */
-  //     1
-  //    / \
-  //   12  9
-  //   /\  /\
-  //  5 n  n 6
+  /*
+      1
+     / \
+    12  9
+    /\  /\
+   5 n  n 6
+  */
   std::cout << "Testing Tree Traversal" << std::endl;
   Node *root = new Node(1);
   root->addLeft(new Node(12));
@@ -23,4 +25,6 @@ int main()
 
   std::cout << "\nPostoder traversal" << std::endl;
   Node::postorderTraversal(root);
+
+  delete root;
 }
