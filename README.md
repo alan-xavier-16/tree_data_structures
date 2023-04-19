@@ -68,3 +68,47 @@ To visit each node, we need to visit all the nodes in the left subtree, visit th
 1. Visit all the nodes in the left subtree,
 2. Visit all the nodes in the right subtree,
 3. Visit the root node.
+
+## Binary Tree
+
+A binary tree is a tree data structure where each parent node can have at most two child nodes. Each node of a binary tree consists of three items:
+
+- Its data,
+- Address of left child,
+- Address of right child.
+
+### Types of Binary Tree
+
+1. `Full Binary Tree`: A binary tree where every node has either two or no children.
+
+| ![Full Binary Tree](/assets/Full%20Binary%20Tree.png) |
+| ----------------------------------------------------- |
+
+2. `Perfect Binary Tree`: A binary tree where every internal node has exactly two child nodes and all the leaf nodes are at the same level.
+
+| ![Perfect Binary Tree](/assets/Perfect%20Binary%20Tree.png) |
+| ----------------------------------------------------- |
+
+3. `Complete Binary Tree`: A binary tree where all the levels are completely **full**, except possibly the deepest level, which can have nodes that have either one left child or can be completely full.
+
+| ![Complete Binary Tree](/assets/Complete%20Binary%20Tree.png) |
+| ----------------------------------------------------- |
+
+4. `Degenerate or Pathological Tree`: A tree having a single child either left or right.
+
+| ![Degenerate Binary Tree](/assets/Degenerate%20Binary%20Tree.png) |
+| ----------------------------------------------------- |
+
+5. `Skewed Binary Tree`: A skewed binary tree is a pathological/degenerate tree where the tree is dominated by either left or right nodes. Thus, there are two types of skewed binary tree: **left-skewed** and **right-skewed** binary trees.
+
+| ![Skeweed Binary Tree](/assets/Skeweed%20Binary%20Tree.png) |
+| ----------------------------------------------------- |
+
+6. `Balanced Binary Tree`: A binary tree where the difference between the height of the left and the right subtree for each node is either 0 or 1.
+
+| ![Balanced Binary Tree](/assets/Balanced%20Binary%20Tree.png) |
+| ----------------------------------------------------- |
+
+
+## References
+1. [Programiz Tree Data Structures](https://www.programiz.com/dsa/binary-tree)
