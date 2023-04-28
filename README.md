@@ -26,6 +26,9 @@ Tree data structures allow for quicker and easier access to the data is not in a
 7. `Degree of a Node`: The total number of branches of that node.
 8. `Forest`: A collection of disjoint trees.
 
+| ![Height and Depth of Tree](./assets/Height%20and%20Depth.png) |
+| ----------------------------------------------------- |
+
 ## Tree Traversal
 
 Traversing a tree means visiting every node in the tree. For example, to add all the values in the tree or to find the largest node requires visiting each node of the tree.
@@ -77,38 +80,94 @@ A binary tree is a tree data structure where each parent node can have at most t
 - Address of left child,
 - Address of right child.
 
-### Types of Binary Tree
+### Full Binary Tree
 
-1. `Full Binary Tree`: A binary tree where every node has either two or no children.
+A full binary tree is a binary tree where every internal node has either two or no children. It is also known as a `proper binary tree`.
 
-| ![Full Binary Tree](/assets/Full%20Binary%20Tree.png) |
+| ![Full Binary Tree](./assets/Full%20Binary%20Tree.png) |
 | ----------------------------------------------------- |
 
-2. `Perfect Binary Tree`: A binary tree where every internal node has exactly two child nodes and all the leaf nodes are at the same level.
+Let `i` be the number of `internal` nodes, `n` be the total number of `nodes`, `l` be the number of `leaves`, and `λ` be the number of `levels`. We can then determine:
 
-| ![Perfect Binary Tree](/assets/Perfect%20Binary%20Tree.png) |
+- The **number of leaves** as `l = i + 1`.
+- The **total number of nodes** as `n = 2i + 1`.
+- The **number of internal nodes** as `i = (n – 1) / 2`.
+- The **number of leaves** as `l = (n + 1) / 2`.
+- The **total number of nodes** as `n = 2l – 1`.
+- The **number of internal nodes** as `i = l – 1`.
+- The **number of leaves** as at most `l = 2^(λ - 1)`.
+
+### Perfect Binary Tree
+
+A perfect binary tree is a binary tree where every internal node has exactly two children and all the leaf nodes are on the same level, i.e. all the internal nodes have a degree of 2.
+
+| ![Perfect Binary Tree](./assets/Perfect%20Binary%20Tree.png) |
 | ----------------------------------------------------- |
 
-3. `Complete Binary Tree`: A binary tree where all the levels are completely **full**, except possibly the deepest level, which can have nodes that have either one left child or can be completely full.
+A perfect binary tree can be defined as:
 
-| ![Complete Binary Tree](/assets/Complete%20Binary%20Tree.png) |
+- If a single node has no children, it is a perfect binary tree of height `h = 0`.
+- If a node has `h > 0`, it is a perfect binary tree if both of its subtrees are of height `h - 1` and are non-overlapping.
+- The **total number of nodes** is `n = 2^(h + 1) - 1`.
+- The **number of leaves** is `l = 2^h`.
+- The **number of internal nodes** is `i = 2^h - 1`.
+
+### Complete Binary Tree
+
+A complete binary tree is A binary tree where all the levels are completely full, except possibly the deepest level, which can have nodes that have either one left child or can be completely full.
+
+It is similar to a full binary tree, except:
+
+- All the leaves must lean towards the left.
+- The last leaf may not have a right sibling, i.e. a complete binary tree doesn't have to be a full binary tree.
+
+| ![Complete Binary Tree](./assets/Complete%20Binary%20Tree.png) |
 | ----------------------------------------------------- |
 
-4. `Degenerate or Pathological Tree`: A tree having a single child either left or right.
+#### Create a Complete Binary Tree
 
-| ![Degenerate Binary Tree](/assets/Degenerate%20Binary%20Tree.png) |
+Given an array of six elements -> `1 | 2 | 3 | 4 | 5 | 6`,
+
+- Select the **first** element to be the **root** node, no. of elements on level `λ-1 = 1`.
+- Place the **second** element as a **left** child and the **third** element as the **right** child, no. of elements on level `λ-2 = 2`.
+- Put the **next two elements as children of the left node** of the second level. Then, put the next **two elements as children of the right node** of the second level, no. of elements on level `λ-3 = 4`.
+- Repeat until the last element.
+
+#### Relationship between array indexes and tree element
+
+A complete binary tree has an interesting relationship that can be used to find the **children and parents of any node**. If the index of any element in the array is `i`, 
+
+- The element at index `2i+1` will become the **left child** and,
+- The element at index `2i+2` index will become the **right child**. 
+- The **parent** of any element at index `i` is given by the lower bound of `(i-1)/2`.
+
+### Degenerate or Pathological Tree
+
+A degenerate or pathological binary tree is a tree having a single child either left or right.
+
+| ![Degenerate Binary Tree](./assets/Degenerate%20Binary%20Tree.png) |
 | ----------------------------------------------------- |
 
-5. `Skewed Binary Tree`: A skewed binary tree is a pathological/degenerate tree where the tree is dominated by either left or right nodes. Thus, there are two types of skewed binary tree: **left-skewed** and **right-skewed** binary trees.
+### Skewed Binary Tree
 
-| ![Skeweed Binary Tree](/assets/Skeweed%20Binary%20Tree.png) |
+A skewed binary tree is a pathological/degenerate tree where the tree is dominated by either left or right nodes. Thus, there are two types of skewed binary tree: **left-skewed** and **right-skewed** binary trees.
+
+| ![Skeweed Binary Tree](./assets/Skewed%20Binary%20Tree.png) |
 | ----------------------------------------------------- |
 
-6. `Balanced Binary Tree`: A binary tree where the difference between the height of the left and the right subtree for each node is either 0 or 1.
+### Balanced Binary Tree
 
-| ![Balanced Binary Tree](/assets/Balanced%20Binary%20Tree.png) |
+A balanced binary tree is a binary tree where the difference between the height of the left and the right subtree for each node is either 0 or 1. It is also referred to as a `height-balanced binary tree`.
+
+| ![Balanced Binary Tree](./assets/Balanced%20Binary%20Tree.png) |
 | ----------------------------------------------------- |
 
+The conditions for a height-balanced binary tree are:
+
+- The difference between the left and the right subtree for any node is **not more than 1**.
+- The left subtree is **balanced**.
+- The right subtree is **balanced**.
 
 ## References
+
 1. [Programiz Tree Data Structures](https://www.programiz.com/dsa/binary-tree)
