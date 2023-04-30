@@ -27,7 +27,7 @@ Tree data structures allow for quicker and easier access to the data is not in a
 8. `Forest`: A collection of disjoint trees.
 
 | ![Height and Depth of Tree](./assets/Height%20and%20Depth.png) |
-| ----------------------------------------------------- |
+| -------------------------------------------------------------- |
 
 ## Tree Traversal
 
@@ -85,9 +85,9 @@ A binary tree is a tree data structure where each parent node can have at most t
 A full binary tree is a binary tree where every internal node has either two or no children. It is also known as a `proper binary tree`.
 
 | ![Full Binary Tree](./assets/Full%20Binary%20Tree.png) |
-| ----------------------------------------------------- |
+| ------------------------------------------------------ |
 
-Let `i` be the number of `internal` nodes, `n` be the total number of `nodes`, `l` be the number of `leaves`, and `λ` be the number of `levels`. We can then determine:
+Let `i` be the number of `internal` nodes, `n` be the total number of `nodes`, `l` be the number of `leaves`, and `L` be the number of `levels`. We can then determine:
 
 - The **number of leaves** as `l = i + 1`.
 - The **total number of nodes** as `n = 2i + 1`.
@@ -95,14 +95,14 @@ Let `i` be the number of `internal` nodes, `n` be the total number of `nodes`, `
 - The **number of leaves** as `l = (n + 1) / 2`.
 - The **total number of nodes** as `n = 2l – 1`.
 - The **number of internal nodes** as `i = l – 1`.
-- The **number of leaves** as at most `l = 2^(λ - 1)`.
+- The **number of leaves** as at most `l = 2^(L - 1)`.
 
 ### Perfect Binary Tree
 
 A perfect binary tree is a binary tree where every internal node has exactly two children and all the leaf nodes are on the same level, i.e. all the internal nodes have a degree of 2.
 
 | ![Perfect Binary Tree](./assets/Perfect%20Binary%20Tree.png) |
-| ----------------------------------------------------- |
+| ------------------------------------------------------------ |
 
 A perfect binary tree can be defined as:
 
@@ -114,7 +114,7 @@ A perfect binary tree can be defined as:
 
 ### Complete Binary Tree
 
-A complete binary tree is A binary tree where all the levels are completely full, except possibly the deepest level, which can have nodes that have either one left child or can be completely full.
+A complete binary tree is a binary tree where all the levels are completely full, except possibly the deepest level, which can have nodes that have either one left child or can be completely full.
 
 It is similar to a full binary tree, except:
 
@@ -122,20 +122,20 @@ It is similar to a full binary tree, except:
 - The last leaf may not have a right sibling, i.e. a complete binary tree doesn't have to be a full binary tree.
 
 | ![Complete Binary Tree](./assets/Complete%20Binary%20Tree.png) |
-| ----------------------------------------------------- |
+| -------------------------------------------------------------- |
 
 #### Create a Complete Binary Tree
 
 Given an array of six elements -> `1 | 2 | 3 | 4 | 5 | 6`,
 
-- Select the **first** element to be the **root** node, no. of elements on level `λ-1 = 1`.
-- Place the **second** element as a **left** child and the **third** element as the **right** child, no. of elements on level `λ-2 = 2`.
-- Put the **next two elements as children of the left node** of the second level. Then, put the next **two elements as children of the right node** of the second level, no. of elements on level `λ-3 = 4`.
+- Select the **first** element to be the **root** node, no. of elements on level `L-1 = 1`.
+- Place the **second** element as a **left** child and the **third** element as the **right** child, no. of elements on level `L-2 = 2`.
+- Put the **next two elements as children of the left node** of the second level. Then, put the next **two elements as children of the right node** of the second level, no. of elements on level `L-3 = 4`.
 - Repeat until the last element.
 
 #### Relationship between array indexes and tree element
 
-A complete binary tree has an interesting relationship that can be used to find the **children and parents of any node**. If the index of any element in the array is `i`, 
+A complete binary tree has an interesting relationship that can be used to find the **children and parents of any node**. If the index of any element in the array is `i`,
 
 - The element at index `2i+1` will become the **left child** and,
 - The element at index `2i+2` index will become the **right child**. 
@@ -146,27 +146,92 @@ A complete binary tree has an interesting relationship that can be used to find 
 A degenerate or pathological binary tree is a tree having a single child either left or right.
 
 | ![Degenerate Binary Tree](./assets/Degenerate%20Binary%20Tree.png) |
-| ----------------------------------------------------- |
+| ------------------------------------------------------------------ |
 
 ### Skewed Binary Tree
 
 A skewed binary tree is a pathological/degenerate tree where the tree is dominated by either left or right nodes. Thus, there are two types of skewed binary tree: **left-skewed** and **right-skewed** binary trees.
 
 | ![Skeweed Binary Tree](./assets/Skewed%20Binary%20Tree.png) |
-| ----------------------------------------------------- |
+| ----------------------------------------------------------- |
 
 ### Balanced Binary Tree
 
 A balanced binary tree is a binary tree where the difference between the height of the left and the right subtree for each node is either 0 or 1. It is also referred to as a `height-balanced binary tree`.
 
 | ![Balanced Binary Tree](./assets/Balanced%20Binary%20Tree.png) |
-| ----------------------------------------------------- |
+| -------------------------------------------------------------- |
 
 The conditions for a height-balanced binary tree are:
 
 - The difference between the left and the right subtree for any node is **not more than 1**.
 - The left subtree is **balanced**.
 - The right subtree is **balanced**.
+
+## Binary Search Tree(BST)
+
+A binary search tree is a data structure that quickly maintains the order of a sorted list of numbers. It is a **binary tree** because each tree node has a maximum of two children. It is also called a **search tree** because it can be used to search for the presence of a number in `O(log(n))` time.
+
+The properties that separate a binary search tree from a regular binary tree is:
+
+- All nodes of **left** subtree are **less** than the **root** node,
+- All nodes of **right** subtree are **more** than the **root** node,
+- Both subtrees of each node are also BSTs i.e. they have the above two properties.
+
+A BST has the following basic operations:
+
+### Search Operation
+
+This algorithm depends on the property of BST where each left subtree has values **below** the root and each right subtree has values **above** the root. If the value is below the root, then the value is not in the right subtree and we only need to search in the left subtree. If the value is above the root, then the value is not in the left subtree and we only need to search in the right subtree.
+
+```C++
+If (root == NULL) 
+    return NULL;
+If (number == root->data) 
+    return root->data;
+If (number < root->data)
+    return search(root->left)
+If (number > root->data) 
+    return search(root->right)
+```
+
+### Insert Operation
+
+When inserting a value in the correct position, we must maintain the rule that the left subtree is **lesser** than the root and the right subtree is **larger** than the root. Depending on the value, we move to either right or left subtree and when we reach a point where the left or right subtree is null, we put the new node there.
+
+```C++
+If (node == NULL) 
+    return createNode(data)
+If (data < node->data)
+    node->left = insert(node->left, data);
+Else if (data > node->data)
+    node->right = insert(node->right, data);  
+return node;
+```
+
+### Deletion Operation
+
+There are three cases to consider when deleting a node from a binary search tree.
+
+1. `Case I`: The node to be deleted is a leaf node and can simply be deleted from the tree.
+2. `Case II`: The node to be deleted has a single child node. In such a case, we (1) replace that node with its child node, then (2) remove the child node from its original position.
+3. `Case III`: The node to be deleted has two children. In such a case, we (1) get the inorder successor of that node, then (2) replace the node with the inorder successor and (3) remove the inorder successor from its original position. **Note**: Inorder Successor of a given node is the node with the smallest value greater than the value of the given node.
+
+## Binary Search Tree Complexities
+
+### Time Complexity
+
+| Operation | Best Case Complexity | Average Case Complexity | Worst Case Complexity |
+| --------- | -------------------- | ----------------------- | --------------------- |
+| Search    | `O(log n)`           | `O(log n)`              | `O(n)`                |
+| Insertion | `O(log n)`           | `O(log n)`              | `O(n)`                |
+| Deletion  | `O(log n)`           | `O(log n)`              | `O(n)`                |
+
+Here, `n` is the number of nodes in the tree.
+
+### Space Complexity
+
+The space complexity for all the operations is `O(n)`.
 
 ## References
 
