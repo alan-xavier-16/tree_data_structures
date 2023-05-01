@@ -325,6 +325,32 @@ During the insertion operation:
         - If `newNodeKey > rightChildKey` do **LL rotation**.
         - Else, do **RL rotation**.
 
+#### Deletion
+
+After deleting a node, the balance factors of the nodes are altered, and suitable rotations may be needed to rebalance the AVL tree.
+
+1. Locate the `nodeToBeDeleted`.
+2. The **three** cases to consider for deleting a node are:
+    - If `nodeToBeDeleted` is a **leaf node**, then remove it.
+    - If `nodeToBeDeleted` has **one child**, then substitute its contents with that of the child and remove the child.
+    - If `nodeToBeDeleted` has **two children**, find its inorder successor (node with the minimum key in the right subtree).
+3. Update `balanceFactor` of the nodes.
+4. **Rebalance** the tree if the balance factor of any of the nodes is violated.
+    - If balanceFactor of `currentNode > 1`,
+        - If balanceFactor of `leftChild >= 0`, do `RR rotation`.
+        - Else do `LR rotation`.
+    - If balanceFactor of `currentNode < -1`,
+        - If balanceFactor of `rightChild <= 0`, do `LL rotation`.
+        - Else do `RL rotation`.
+
+### AVL Tree Complexities
+
+| Operation | Average Case Complexity | Worst Case Complexity |
+| --------- | ----------------------- | --------------------- |
+| Search    | `O(log n)`              | `O(log n)`            |
+| Insertion | `O(log n)`              | `O(log n)`            |
+| Deletion  | `O(log n)`              | `O(log n)`            |
+
 ## References
 
 1. [Programiz Tree Data Structures](https://www.programiz.com/dsa/binary-tree)
