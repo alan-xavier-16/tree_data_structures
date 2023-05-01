@@ -178,9 +178,9 @@ The properties that separate a binary search tree from a regular binary tree is:
 - All nodes of **right** subtree are **more** than the **root** node,
 - Both subtrees of each node are also BSTs i.e. they have the above two properties.
 
-A BST has the following basic operations:
+### Operations of BST Trees
 
-### Search Operation
+#### Search Operation
 
 This algorithm depends on the property of BST where each left subtree has values **below** the root and each right subtree has values **above** the root. If the value is below the root, then the value is not in the right subtree and we only need to search in the left subtree. If the value is above the root, then the value is not in the left subtree and we only need to search in the right subtree.
 
@@ -195,7 +195,7 @@ If (number > root->data)
     return search(root->right)
 ```
 
-### Insert Operation
+#### Insert Operation
 
 When inserting a value in the correct position, we must maintain the rule that the left subtree is **lesser** than the root and the right subtree is **larger** than the root. Depending on the value, we move to either right or left subtree and when we reach a point where the left or right subtree is null, we put the new node there.
 
@@ -209,7 +209,7 @@ Else if (data > node->data)
 return node;
 ```
 
-### Deletion Operation
+#### Deletion Operation
 
 There are three cases to consider when deleting a node from a binary search tree.
 
@@ -217,9 +217,9 @@ There are three cases to consider when deleting a node from a binary search tree
 2. `Case II`: The node to be deleted has a single child node. In such a case, we (1) replace that node with its child node, then (2) remove the child node from its original position.
 3. `Case III`: The node to be deleted has two children. In such a case, we (1) get the inorder successor of that node, then (2) replace the node with the inorder successor and (3) remove the inorder successor from its original position. **Note**: Inorder Successor of a given node is the node with the smallest value greater than the value of the given node.
 
-## Binary Search Tree Complexities
+### Binary Search Tree Complexities
 
-### Time Complexity
+#### Time Complexity
 
 | Operation | Best Case Complexity | Average Case Complexity | Worst Case Complexity |
 | --------- | -------------------- | ----------------------- | --------------------- |
@@ -229,10 +229,103 @@ There are three cases to consider when deleting a node from a binary search tree
 
 Here, `n` is the number of nodes in the tree.
 
-### Space Complexity
+#### Space Complexity
 
 The space complexity for all the operations is `O(n)`.
+
+## AVL Tree
+
+An AVL tree is a `self-balancing` binary search tree where each node maintains extra information called a **balance factor** with a value of `-1, 0 or +1`. The self balancing property is maintained by the balance factor.
+
+### Balance Factor
+
+The balance factor of a node in an AVL tree is the difference between the `height of the left subtree and the height of the right subtree` of the given node.
+
+```C++
+Balance Factor = (Height of Left Subtree - Height of Right Subtree)
+```
+
+An AVL Tree has the following operations:
+
+### Rotations
+
+Rotations are used to maintain the self-balancing of AVL trees. The four cases of rotations are:
+
+#### LL Rotations
+
+Performed when a node is inserted into the `right subtree of the right subtree` leading to an unbalanced tree. A `single` left rotation is used to rebalance the tree. Observe:
+
+- The node where the unbalance occurs becomes the **left** child,
+- The newly added node becomes the **right** child,
+- The middle node becomes the **parent** node.
+
+| ![LL_Rotations](./assets/LL_Rotations.jpg) |
+| ------------------------------------------ |
+
+#### RR Rotations
+
+Performed when a node is inserted into the `left subtree of the left subtree` leading to an unbalanced tree. A `single` right rotation is used to rebalance the tree. Observe:
+
+- The node where the unbalance occurs becomes the **right** child,
+- The newly added node becomes the **left** child,
+- The middle node the **parent** node.
+
+| ![RR_Rotations](./assets/RR_Rotations.jpg) |
+| ------------------------------------------ |
+
+#### LR Rotations
+
+LR rotations are called a `double rotation` and is performed when a node is inserted into the `right subtree of the left subtree`. It is a combination of the `left rotation followed by the right rotation`. Consider the example below, to rebalance the tree:
+
+- The unbalance occurs at 13, and a **left rotation** is applied on the child nodes of 13, i.e. 11 and 12.
+- Afterwards, the 12 node becomes the left child of 13 and 11 becomes the left child of 12.
+- Since the unbalance still persists, a **right rotation** is applied at the root node 13 and the left child 12.
+- After the final right rotation, 12 becomes the root node, 13 becomes the right child and 11 is the left child.
+
+| ![LR_Rotations](./assets/LR_Rotations.jpg) |
+| ------------------------------------------ |
+
+#### RL Rotations
+
+RL rotation are called a `double rotation` and is performed when a node is inserted into the `left subtree of the right subtree`. It is a combination of the `right rotation followed by the left rotation`. Consider the example below, to rebalance the tree:
+
+- The unbalance occurs at 12, a **right rotation** is applied on the child nodes of 12, i.e. 15 and 13.
+- Afterwards, the 13 node becomes the right child of 12 and 15 becomes the right child of 13.
+- Since the unbalance still persists, a **left rotation** is applied at the root node 12 and the right child 13.
+- After the final left rotation, 13 becomes the root node, 12 becomes the left child and 15 is the right child.
+
+| ![RL_Rotations](./assets/RL_Rotations.jpg) |
+| ------------------------------------------ |
+
+### Operations of AVL Trees
+
+Since AVL Trees are binary search trees, they possess all the operations associated with BSTs while holding all its properties. However, **Insertion** and **Deletion** can result in an **unbalanced** AVL tree.
+
+#### Insertion
+
+Inserting into an AVL Tree follows the BST property of insertion where the left subtree contains elements less than the root value and right subtree contains elements greater than the root value. However, after insertion, the balance factor must be checked. If the balance factor is not `-1, 0 or 1`, a balancing algorithm is applied to rebalance the tree.
+
+During the insertion operation:
+
+1. A `newNode` is inserted as a leaf node with balance factor of 0.
+2. If the tree is empty, the new node becomes the root node.
+3. However, if the tree is not empty, we move to the appropriate `leafNode` by comparing the `newKey` with `rootKey` of the current tree.
+    - If `newKey < rootKey`, call the insertion algorithm on the left subtree of the current node until the leaf node is reached.
+    - Else if `newKey > rootKey`, call the insertion algorithm on the right subtree of current node until the leaf node is reached.
+    - Else, return the `leafNode`.
+4. Compare `leafKey` obtained from the above steps with `newKey`:
+    - If `newKey < leafKey`, make newNode as the `leftChild` of leafNode.
+    - Else, make newNode as `rightChild` of leafNode.
+5. Update `balanceFactor` of the nodes.
+6. If the nodes are **unbalanced**, then **rebalance** the node.
+    - If `balanceFactor > 1`, the height of the left subtree is greater than that of the right subtree, so a `RR rotation or LR rotation` is needed.
+        - If `newNodeKey < leftChildKey` do **RR rotation**.
+        - Else, do **LR rotation**.
+    - If `balanceFactor < -1`, the height of the right subtree is greater than that of the left subtree, so do a `LL rotation or RL rotation`
+        - If `newNodeKey > rightChildKey` do **LL rotation**.
+        - Else, do **RL rotation**.
 
 ## References
 
 1. [Programiz Tree Data Structures](https://www.programiz.com/dsa/binary-tree)
+2. [Tutorials Point Data Structures](https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm)
