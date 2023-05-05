@@ -1,6 +1,12 @@
 #include "Node.h"
 
-Node::Node(int data) : _data(data) {}
+Node::Node(int key) : _key(key) {}
+
+// Get key
+int Node::getKey()
+{
+  return this->_key;
+}
 
 // Print left && right nodes
 Node *Node::getLeft()
@@ -24,6 +30,18 @@ void Node::addRight(Node *r)
   this->_right = r;
 }
 
+// Get Height
+int Node::getHeight()
+{
+  return this->_height;
+}
+
+// Update Height
+void Node::updateHeight(int h)
+{
+  this->_height = h;
+}
+
 // Preorder
 void Node::preorderTraversal(Node *node)
 {
@@ -32,7 +50,7 @@ void Node::preorderTraversal(Node *node)
     return;
 
   // Print root
-  std::cout << node->_data << "->";
+  std::cout << node->_key << "->";
 
   // Visit left and right subtrees
   preorderTraversal(node->_left);
@@ -51,7 +69,7 @@ void Node::postorderTraversal(Node *node)
   postorderTraversal(node->_right);
 
   // Print root
-  std::cout << node->_data << "->";
+  std::cout << node->_key << "->";
 }
 
 // Inorder
@@ -65,7 +83,7 @@ void Node::inorderTraversal(Node *node)
   inorderTraversal(node->_left);
 
   // Print root
-  std::cout << node->_data << "->";
+  std::cout << node->_key << "->";
 
   // Visit right subtrees
   inorderTraversal(node->_right);

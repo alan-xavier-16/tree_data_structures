@@ -7,13 +7,17 @@
 class Node
 {
 private:
-  int _data;
+  int _key;
   Node *_left = NULL;  // Point to LEFT SUBTREE, Default is NULL
   Node *_right = NULL; // Point to RIGHT SUBTREE, Default is NULL
+  int _height = 1;
 
 public:
   // Default Constructor
-  Node(int data);
+  Node(int key);
+
+  // Get key
+  int getKey();
 
   // Print left && right nodes
   Node *getLeft();
@@ -22,6 +26,12 @@ public:
   // Update left && right nodes
   void addLeft(Node *l);
   void addRight(Node *r);
+
+  // Get Height
+  int getHeight();
+
+  // Update Height
+  void updateHeight(int h);
 
   // Preorder
   static void preorderTraversal(Node *node);

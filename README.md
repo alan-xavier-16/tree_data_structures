@@ -251,7 +251,7 @@ An AVL Tree has the following operations:
 
 Rotations are used to maintain the self-balancing of AVL trees. The four cases of rotations are:
 
-#### LL Rotations
+#### Left Rotations
 
 Performed when a node is inserted into the `right subtree of the right subtree` leading to an unbalanced tree. A `single` left rotation is used to rebalance the tree. Observe:
 
@@ -259,10 +259,10 @@ Performed when a node is inserted into the `right subtree of the right subtree` 
 - The newly added node becomes the **right** child,
 - The middle node becomes the **parent** node.
 
-| ![LL_Rotations](./assets/LL_Rotations.jpg) |
+| ![Left_Rotations](./assets/Left_Rotations.png) |
 | ------------------------------------------ |
 
-#### RR Rotations
+#### Right Rotations
 
 Performed when a node is inserted into the `left subtree of the left subtree` leading to an unbalanced tree. A `single` right rotation is used to rebalance the tree. Observe:
 
@@ -270,31 +270,31 @@ Performed when a node is inserted into the `left subtree of the left subtree` le
 - The newly added node becomes the **left** child,
 - The middle node the **parent** node.
 
-| ![RR_Rotations](./assets/RR_Rotations.jpg) |
+| ![Right_Rotations](./assets/Right_Rotations.png) |
 | ------------------------------------------ |
 
-#### LR Rotations
+#### Left-Right Rotations
 
-LR rotations are called a `double rotation` and is performed when a node is inserted into the `right subtree of the left subtree`. It is a combination of the `left rotation followed by the right rotation`. Consider the example below, to rebalance the tree:
+Left-Right rotations are called a `double rotation` and is performed when a node is inserted into the `right subtree of the left subtree`. It is a combination of the `left rotation followed by the right rotation`. Consider the example below, to rebalance the tree:
 
-- The unbalance occurs at 13, and a **left rotation** is applied on the child nodes of 13, i.e. 11 and 12.
-- Afterwards, the 12 node becomes the left child of 13 and 11 becomes the left child of 12.
-- Since the unbalance still persists, a **right rotation** is applied at the root node 13 and the left child 12.
-- After the final right rotation, 12 becomes the root node, 13 becomes the right child and 11 is the left child.
+- The unbalance occurs at C, and a **left rotation** is applied on the child nodes, A and B.
+- B becomes the left child of C and A becomes the left child of B.
+- Since the unbalance still persists, a **right rotation** is applied at the root node C and the left child B.
+- B becomes the root node, A becomes the right child and C is the left child.
 
-| ![LR_Rotations](./assets/LR_Rotations.jpg) |
+| ![Left-Right_Rotations](./assets/Left-Right_Rotations.png) |
 | ------------------------------------------ |
 
-#### RL Rotations
+#### Right-Left Rotations
 
-RL rotation are called a `double rotation` and is performed when a node is inserted into the `left subtree of the right subtree`. It is a combination of the `right rotation followed by the left rotation`. Consider the example below, to rebalance the tree:
+Right-Left rotation are called a `double rotation` and is performed when a node is inserted into the `left subtree of the right subtree`. It is a combination of the `right rotation followed by the left rotation`. Consider the example below, to rebalance the tree:
 
-- The unbalance occurs at 12, a **right rotation** is applied on the child nodes of 12, i.e. 15 and 13.
-- Afterwards, the 13 node becomes the right child of 12 and 15 becomes the right child of 13.
-- Since the unbalance still persists, a **left rotation** is applied at the root node 12 and the right child 13.
-- After the final left rotation, 13 becomes the root node, 12 becomes the left child and 15 is the right child.
+- The unbalance occurs at A, and a **right rotation** is applied on the child nodes, C and B.
+- B becomes the right child of A and C becomes the right child of B.
+- Since the unbalance still persists, a **left rotation** is applied at the root node A and the right child B.
+- B becomes the root node, A becomes the left child and C is the right child.
 
-| ![RL_Rotations](./assets/RL_Rotations.jpg) |
+| ![Right-Left_Rotations](./assets/Right-Left_Rotations.png) |
 | ------------------------------------------ |
 
 ### Operations of AVL Trees
@@ -318,12 +318,12 @@ During the insertion operation:
     - Else, make newNode as `rightChild` of leafNode.
 5. Update `balanceFactor` of the nodes.
 6. If the nodes are **unbalanced**, then **rebalance** the node.
-    - If `balanceFactor > 1`, the height of the left subtree is greater than that of the right subtree, so a `RR rotation or LR rotation` is needed.
-        - If `newNodeKey < leftChildKey` do **RR rotation**.
-        - Else, do **LR rotation**.
-    - If `balanceFactor < -1`, the height of the right subtree is greater than that of the left subtree, so do a `LL rotation or RL rotation`
-        - If `newNodeKey > rightChildKey` do **LL rotation**.
-        - Else, do **RL rotation**.
+    - If `balanceFactor > 1`, the height of the left subtree is greater than that of the right subtree, so a `Right rotation or Left-Right rotation` is needed.
+        - If `newNodeKey < leftChildKey` do **Right rotation**.
+        - Else, do **Left-Right rotation**.
+    - If `balanceFactor < -1`, the height of the right subtree is greater than that of the left subtree, so do a `Left rotation or Right-Left rotation`
+        - If `newNodeKey > rightChildKey` do **Left rotation**.
+        - Else, do **Right-Left rotation**.
 
 #### Deletion
 
@@ -337,11 +337,11 @@ After deleting a node, the balance factors of the nodes are altered, and suitabl
 3. Update `balanceFactor` of the nodes.
 4. **Rebalance** the tree if the balance factor of any of the nodes is violated.
     - If balanceFactor of `currentNode > 1`,
-        - If balanceFactor of `leftChild >= 0`, do `RR rotation`.
-        - Else do `LR rotation`.
+        - If balanceFactor of `leftChild >= 0`, do `Right rotation`.
+        - Else do `Left-Right rotation`.
     - If balanceFactor of `currentNode < -1`,
-        - If balanceFactor of `rightChild <= 0`, do `LL rotation`.
-        - Else do `RL rotation`.
+        - If balanceFactor of `rightChild <= 0`, do `Left rotation`.
+        - Else do `Right-Left rotation`.
 
 ### AVL Tree Complexities
 
@@ -354,4 +354,4 @@ After deleting a node, the balance factors of the nodes are altered, and suitabl
 ## References
 
 1. [Programiz Tree Data Structures](https://www.programiz.com/dsa/binary-tree)
-2. [Tutorials Point Data Structures](https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm)
+2. [GeeksforGeeks AVL Trees](https://www.geeksforgeeks.org/introduction-to-avl-tree/)
